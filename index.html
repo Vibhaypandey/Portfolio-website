@@ -68,37 +68,19 @@
   .hero-grid{
     position:relative; z-index:2;
     width:100%;
-    display:grid;
-    grid-template-columns:1fr 1.15fr;
-    gap:48px;
-    align-items:center;
+    display:flex;
+    justify-content:flex-end;
   }
 
-  /* left: decorative terminal, stands in for the portrait photo */
-  .visual{
-    background:var(--panel);
-    border:1px solid var(--panel-border);
-    border-radius:10px;
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
-    overflow:hidden;
-    transform:translateY(0);
-    animation:float 6s ease-in-out infinite;
+  /* name block */
+  .content{
+    padding:20px 0;
+    max-width:640px;
+    text-align:right;
   }
-  @keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
-  .visual-bar{display:flex; align-items:center; gap:7px; padding:12px 16px; background:#0e1620; border-bottom:1px solid var(--panel-border);}
-  .visual-bar span{width:10px; height:10px; border-radius:50%;}
-  .visual-bar .r{background:#e0605a;} .visual-bar .y{background:#e6b84f;} .visual-bar .g{background:#4fd18a;}
-  .visual-bar .tag{margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--text-muted);}
-  .visual-body{padding:26px 24px 30px; font-family:var(--mono); font-size:14px; line-height:2; color:var(--text-muted);}
-  .visual-body .p{color:var(--teal);}
-  .visual-body .c{color:var(--text);}
-  .visual-body .ok{color:#4fd18a;}
-  .visual-body .k{color:var(--accent-2);}
-  .caret{display:inline-block; width:8px; height:15px; background:var(--accent-2); vertical-align:middle; margin-left:2px; animation:blink 1s step-end infinite;}
+  .icon-row{justify-content:flex-end;}
+  .subline{justify-content:flex-end;}
   @keyframes blink{50%{opacity:0;}}
-
-  /* right: name block */
-  .content{padding:20px 0;}
   .name-highlight{
     display:inline-block;
     background:var(--accent);
@@ -146,10 +128,88 @@
   }
 
   @media (max-width:860px){
-    .hero-grid{grid-template-columns:1fr; text-align:left;}
-    .visual{order:2;}
-    .content{order:1;}
+    .hero-grid{justify-content:flex-start;}
+    .content{text-align:left; max-width:100%;}
+    .icon-row{justify-content:flex-start;}
+    .subline{justify-content:flex-start;}
     .hero{padding:100px 6vw 60px;}
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    position:relative;
+    padding:100px 6vw 110px;
+    border-top:1px solid var(--panel-border);
+  }
+  .about-head{text-align:center; margin-bottom:16px;}
+  .about-head h2{
+    font-family:var(--mono); font-weight:700;
+    font-size:clamp(26px, 3.4vw, 38px);
+    letter-spacing:.02em;
+  }
+  .about-head .rule{
+    width:64px; height:3px; background:var(--accent);
+    margin:16px auto 0; border-radius:2px;
+  }
+  .about-intro{
+    max-width:760px; margin:28px auto 64px;
+    text-align:center; color:var(--text-muted); font-size:16.5px; line-height:1.8;
+  }
+
+  .about-grid{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:56px;
+    align-items:start;
+    max-width:1080px;
+    margin:0 auto;
+  }
+
+  .about-photo{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:14px;
+    background:var(--panel);
+    border:1px dashed var(--panel-border);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px;
+    overflow:hidden;
+  }
+  .about-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .about-photo .ph-icon{
+    width:78px; height:78px; border-radius:50%;
+    background:var(--accent-soft, rgba(47,95,214,.15));
+    display:flex; align-items:center; justify-content:center;
+    font-size:30px; color:var(--accent); font-family:var(--mono); font-weight:700;
+  }
+  .about-photo .ph-label{font-family:var(--mono); font-size:12px; color:var(--text-muted);}
+
+  .about-role{
+    color:var(--accent-2); font-family:var(--mono); font-weight:700;
+    font-size:clamp(19px, 2.4vw, 23px); margin-bottom:18px;
+  }
+  .about-body p{color:var(--text-muted); font-size:15.5px; margin-bottom:24px;}
+
+  .about-details{
+    display:grid; grid-template-columns:1fr 1fr; gap:8px 40px;
+    margin-bottom:26px;
+  }
+  .about-details .d-row{
+    display:flex; gap:8px; padding:10px 0; border-bottom:1px solid var(--panel-border);
+    font-size:14.5px;
+  }
+  .about-details .d-row .k{font-family:var(--mono); color:var(--text-faint, #5a6878); min-width:88px;}
+  .about-details .d-row .v{color:var(--text);}
+  .about-details .d-row a.v:hover{color:var(--accent-2);}
+
+  .about-closing{color:var(--text-muted); font-size:14.5px; line-height:1.8;}
+  .about-closing a{color:var(--teal);}
+  .about-closing a:hover{text-decoration:underline;}
+
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-photo{max-width:280px; margin:0 auto;}
+    .about-details{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -157,26 +217,6 @@
 
 <section class="hero">
   <div class="hero-grid">
-
-    <div class="visual">
-      <div class="visual-bar">
-        <span class="r"></span><span class="y"></span><span class="g"></span>
-        <span class="tag">vibhay@ericsson:~</span>
-      </div>
-      <div class="visual-body">
-        <div><span class="p">$</span> <span class="c">whoami</span></div>
-        <div class="ok">vibhay-kumar-pandey</div>
-        <br>
-        <div><span class="p">$</span> <span class="c">cat role.txt</span></div>
-        <div><span class="k">title:</span> Software Developer</div>
-        <div><span class="k">company:</span> Ericsson</div>
-        <div><span class="k">stack:</span> Java, Spring Boot, K8s, AWS</div>
-        <br>
-        <div><span class="p">$</span> <span class="c">status</span></div>
-        <div class="ok">✓ open to good problems</div>
-        <div><span class="p">$</span><span class="caret"></span></div>
-      </div>
-    </div>
 
     <div class="content">
       <div class="name-highlight">Vibhay Kumar Pandey</div>
@@ -197,6 +237,56 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-head">
+    <h2>About</h2>
+    <div class="rule"></div>
+  </div>
+  <p class="about-intro">
+    I'm a software developer with hands-on experience building and running backend systems in production.
+    I enjoy digging into infrastructure problems — Kubernetes rollouts, deployment pipelines, data workflows —
+    and solving them with clean, dependable code. I'm also a competitive programmer, having solved 300+ DSA
+    problems across LeetCode and GeeksforGeeks.
+  </p>
+
+  <div class="about-grid">
+    <!-- DUMMY PLACEHOLDER IMAGE — replace src="img/profile.jpg" with your real photo later -->
+    <div class="about-photo">
+      <img src="img/profile.jpg" alt="Vibhay Kumar Pandey" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="ph-icon" style="display:none;">VP</div>
+      <div class="ph-label" style="display:none;">add img/profile.jpg</div>
+    </div>
+
+    <div>
+      <div class="about-role">Software Developer &amp;&amp; Backend / Cloud Engineer</div>
+      <div class="about-body">
+        <p>
+          Since November 2022 I've been building backend services at Ericsson using Java and Spring Boot,
+          running on AWS EKS and Kubernetes. I've led production upgrades, migrated deployments to Helm,
+          automated data archival pipelines, and hardened services against security vulnerabilities —
+          shipping changes with zero downtime along the way.
+        </p>
+      </div>
+
+      <div class="about-details">
+        <div class="d-row"><span class="k">Company:</span><span class="v">Ericsson</span></div>
+        <div class="d-row"><span class="k">LinkedIn:</span><a class="v" href="https://www.linkedin.com/in/vibhay-pandey-dev/" target="_blank" rel="noopener">linkedin.com/in/vibhay-pandey-dev</a></div>
+        <div class="d-row"><span class="k">Mobile:</span><a class="v" href="tel:+916266830971">+91 62668 30971</a></div>
+        <div class="d-row"><span class="k">GitHub:</span><a class="v" href="https://github.com/Vibhaypandey/" target="_blank" rel="noopener">github.com/Vibhaypandey</a></div>
+        <div class="d-row"><span class="k">Email:</span><a class="v" href="mailto:vibhaypandey2000@gmail.com">vibhaypandey2000@gmail.com</a></div>
+        <div class="d-row"><span class="k">LeetCode:</span><a class="v" href="https://leetcode.com/u/vibhay8583pandey/" target="_blank" rel="noopener">leetcode.com/u/vibhay8583pandey</a></div>
+        <div class="d-row"><span class="k">Location:</span><span class="v">Noida, India</span></div>
+        <div class="d-row"><span class="k">Open to:</span><span class="v">Good backend &amp; infra problems</span></div>
+      </div>
+
+      <p class="about-closing">
+        Have an idea, a tricky bug, or want to talk backend/cloud architecture?
+        <a href="mailto:vibhaypandey2000@gmail.com">Send me a mail</a> — always happy to talk shop.
+      </p>
+    </div>
   </div>
 </section>
 
