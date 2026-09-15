@@ -3,392 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vibhay Kumar Pandey — Software Developer</title>
-<meta name="description" content="Vibhay Kumar Pandey — Software Developer at Ericsson. Java, Spring Boot, Kubernetes, AWS, Kafka.">
+<title>Vibhay Kumar Pandey</title>
+<meta name="description" content="Vibhay Kumar Pandey — Software Developer at Ericsson.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
   :root{
-    --bg:#0d1219;
-    --bg-alt:#111a24;
-    --panel:#141d29;
-    --panel-border:#22303f;
-    --text:#e7edf3;
-    --text-muted:#8493a3;
-    --text-faint:#5a6878;
-    --accent:#e6a23c;
-    --accent-soft:#e6a23c26;
+    --bg:#0b1017;
+    --panel:#121a24;
+    --panel-border:#223140;
+    --text:#eef2f6;
+    --text-muted:#93a0ae;
+    --accent:#2f5fd6;
+    --accent-2:#e6a23c;
     --teal:#4fd1c5;
-    --mono: 'JetBrains Mono', ui-monospace, monospace;
-    --sans: 'Inter', -apple-system, sans-serif;
-    --maxw: 1080px;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'Inter', -apple-system, sans-serif;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html,body{height:100%;}
   body{
     background:var(--bg);
     color:var(--text);
     font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   a{color:inherit; text-decoration:none;}
-  ::selection{background:var(--accent-soft); color:var(--accent);}
 
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:0 6vw;
+    overflow:hidden;
+  }
 
-  /* subtle background grid texture */
-  body::before{
+  /* ambient background: soft radial glow + grid, stands in for a photo */
+  .hero::before{
     content:"";
-    position:fixed; inset:0;
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 18% 30%, rgba(47,95,214,.28), transparent 45%),
+      radial-gradient(circle at 85% 70%, rgba(230,162,60,.14), transparent 40%),
+      linear-gradient(180deg, #0b1017 0%, #0d1420 100%);
+    z-index:0;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
     background-image:
       linear-gradient(var(--panel-border) 1px, transparent 1px),
       linear-gradient(90deg, var(--panel-border) 1px, transparent 1px);
-    background-size:64px 64px;
-    opacity:.08;
-    pointer-events:none;
+    background-size:56px 56px;
+    opacity:.09;
     z-index:0;
+    mask-image:linear-gradient(180deg, transparent, black 30%, black 70%, transparent);
   }
 
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(13,18,25,.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--panel-border);
-  }
-  .nav-inner{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px; max-width:var(--maxw); margin:0 auto;
-  }
-  .logo{
-    font-family:var(--mono); font-weight:700; font-size:15px;
-    color:var(--text);
-    display:flex; align-items:center; gap:8px;
-  }
-  .logo .dot{width:7px; height:7px; border-radius:50%; background:var(--teal); box-shadow:0 0 8px var(--teal); animation:pulse 2.2s ease-in-out infinite;}
-  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
-  nav.links{display:flex; gap:28px; font-family:var(--mono); font-size:13.5px; color:var(--text-muted);}
-  nav.links a{transition:color .15s;}
-  nav.links a:hover{color:var(--accent);}
-  .nav-toggle{display:none;}
-
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative; z-index:1;
-    padding:88px 0 96px;
+  .hero-grid{
+    position:relative; z-index:2;
+    width:100%;
     display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:56px;
+    grid-template-columns:1fr 1.15fr;
+    gap:48px;
     align-items:center;
   }
-  .eyebrow{
-    font-family:var(--mono); font-size:13px; color:var(--teal);
-    display:flex; align-items:center; gap:10px; margin-bottom:22px;
-  }
-  .eyebrow::before{content:"$"; color:var(--text-faint);}
-  h1.name{
-    font-family:var(--mono);
-    font-weight:700;
-    font-size:clamp(34px, 5.2vw, 56px);
-    line-height:1.08;
-    letter-spacing:-0.01em;
-    color:var(--text);
-    margin-bottom:18px;
-  }
-  h1.name span{color:var(--accent);}
-  .role-line{
-    font-size:19px; color:var(--text-muted);
-    margin-bottom:26px;
-    max-width:52ch;
-  }
-  .role-line strong{color:var(--text); font-weight:600;}
-  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:34px;}
-  .btn{
-    font-family:var(--mono); font-size:13.5px;
-    padding:11px 18px;
-    border-radius:4px;
-    border:1px solid var(--panel-border);
-    color:var(--text);
-    transition:border-color .15s, background .15s, transform .15s;
-    display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn:hover{border-color:var(--accent); background:var(--accent-soft); transform:translateY(-1px);}
-  .btn.primary{background:var(--accent); color:#1a1305; border-color:var(--accent); font-weight:600;}
-  .btn.primary:hover{background:#f0af4d; transform:translateY(-1px);}
-  .contact-strip{
-    display:flex; flex-wrap:wrap; gap:18px;
-    font-family:var(--mono); font-size:13px; color:var(--text-faint);
-  }
-  .contact-strip a:hover{color:var(--teal);}
 
-  /* terminal panel */
-  .terminal{
+  /* left: decorative terminal, stands in for the portrait photo */
+  .visual{
     background:var(--panel);
     border:1px solid var(--panel-border);
-    border-radius:8px;
+    border-radius:10px;
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
     overflow:hidden;
-    box-shadow:0 20px 60px -20px rgba(0,0,0,.6);
+    transform:translateY(0);
+    animation:float 6s ease-in-out infinite;
   }
-  .terminal-bar{
-    display:flex; align-items:center; gap:7px;
-    padding:11px 14px;
-    background:var(--bg-alt);
-    border-bottom:1px solid var(--panel-border);
-  }
-  .terminal-bar .tdot{width:10px; height:10px; border-radius:50%;}
-  .tdot.r{background:#e0605a;} .tdot.y{background:#e6b84f;} .tdot.g{background:#4fd18a;}
-  .terminal-bar .tlabel{margin-left:auto; font-family:var(--mono); font-size:11.5px; color:var(--text-faint);}
-  .terminal-body{
-    padding:20px 20px 24px;
-    font-family:var(--mono); font-size:13px; line-height:1.9;
-    color:var(--text-muted);
-    min-height:230px;
-  }
-  .terminal-body .prompt{color:var(--teal);}
-  .terminal-body .cmd{color:var(--text);}
-  .terminal-body .ok{color:#4fd18a;}
-  .terminal-body .k{color:var(--accent);}
-  .cursor-blink{display:inline-block; width:7px; height:14px; background:var(--accent); vertical-align:middle; animation:blink 1s step-end infinite; margin-left:2px;}
+  @keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
+  .visual-bar{display:flex; align-items:center; gap:7px; padding:12px 16px; background:#0e1620; border-bottom:1px solid var(--panel-border);}
+  .visual-bar span{width:10px; height:10px; border-radius:50%;}
+  .visual-bar .r{background:#e0605a;} .visual-bar .y{background:#e6b84f;} .visual-bar .g{background:#4fd18a;}
+  .visual-bar .tag{margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--text-muted);}
+  .visual-body{padding:26px 24px 30px; font-family:var(--mono); font-size:14px; line-height:2; color:var(--text-muted);}
+  .visual-body .p{color:var(--teal);}
+  .visual-body .c{color:var(--text);}
+  .visual-body .ok{color:#4fd18a;}
+  .visual-body .k{color:var(--accent-2);}
+  .caret{display:inline-block; width:8px; height:15px; background:var(--accent-2); vertical-align:middle; margin-left:2px; animation:blink 1s step-end infinite;}
   @keyframes blink{50%{opacity:0;}}
 
-  /* ---------- SECTIONS ---------- */
-  section{position:relative; z-index:1; padding:64px 0;}
-  section + section{border-top:1px solid var(--panel-border);}
-  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:36px;}
-  .section-head h2{
-    font-family:var(--mono); font-weight:600; font-size:22px; color:var(--text);
+  /* right: name block */
+  .content{padding:20px 0;}
+  .name-highlight{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:clamp(30px, 5vw, 52px);
+    line-height:1.15;
+    padding:10px 20px;
+    margin-bottom:22px;
+    box-shadow:0 14px 40px -14px rgba(47,95,214,.6);
   }
-  .section-head .tag{
-    font-family:var(--mono); font-size:12.5px; color:var(--text-faint);
-    border:1px solid var(--panel-border); padding:3px 9px; border-radius:20px;
+  .role-line{
+    font-size:clamp(19px, 2.4vw, 26px);
+    color:var(--text-muted);
+    margin-bottom:34px;
+    font-family:var(--sans);
+  }
+  .role-line .who{color:var(--text); font-weight:600;}
+  .role-line #role-type{color:var(--accent-2); font-weight:600;}
+  .role-line #role-type::after{content:"|"; margin-left:2px; animation:blink 1s step-end infinite;}
+
+  .icon-row{display:flex; gap:18px; flex-wrap:wrap;}
+  .icon-row a{
+    width:52px; height:52px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:10px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    font-size:20px;
+    color:var(--text-muted);
+    transition:all .18s ease;
+  }
+  .icon-row a:hover{
+    color:#fff;
+    border-color:var(--accent);
+    background:var(--accent);
+    transform:translateY(-3px);
   }
 
-  /* experience */
-  .exp-card{display:grid; grid-template-columns:200px 1fr; gap:32px;}
-  .exp-meta{font-family:var(--mono); font-size:13px; color:var(--text-faint);}
-  .exp-meta .company{color:var(--text); font-size:16px; font-weight:600; font-family:var(--sans); margin-bottom:4px;}
-  .exp-meta .dates{margin-bottom:10px;}
-  .exp-meta .place{color:var(--text-faint);}
-  .exp-role{font-size:16px; color:var(--accent); font-weight:600; margin-bottom:14px;}
-  .exp-stack{font-family:var(--mono); font-size:12px; color:var(--teal); margin-bottom:16px; line-height:1.8;}
-  ul.bullets{list-style:none;}
-  ul.bullets li{
-    position:relative; padding-left:20px; margin-bottom:13px;
-    color:var(--text-muted); font-size:15px;
+  .subline{
+    margin-top:38px;
+    font-family:var(--mono); font-size:13px; color:#5a6878;
+    display:flex; gap:20px; flex-wrap:wrap;
   }
-  ul.bullets li::before{
-    content:"›"; position:absolute; left:0; color:var(--accent); font-family:var(--mono); font-weight:700;
-  }
-  ul.bullets li strong{color:var(--text); font-weight:600;}
-
-  /* skills */
-  .skills-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:28px 48px;}
-  .skill-group{border-left:2px solid var(--panel-border); padding-left:18px;}
-  .skill-group h3{
-    font-family:var(--mono); font-size:13px; color:var(--text-faint);
-    text-transform:lowercase; margin-bottom:12px; font-weight:500;
-  }
-  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    font-family:var(--mono); font-size:12.5px;
-    padding:6px 11px; border:1px solid var(--panel-border); border-radius:4px;
-    color:var(--text-muted); background:var(--panel);
-    transition:border-color .15s, color .15s;
-  }
-  .chip:hover{border-color:var(--accent); color:var(--accent);}
-
-  /* achievements + education */
-  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
-  .info-block h3{font-family:var(--mono); font-size:13px; color:var(--text-faint); margin-bottom:16px; font-weight:500;}
-  .info-block .row{display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid var(--panel-border);}
-  .info-block .row:last-child{border-bottom:none;}
-  .info-block .row .l{color:var(--text); font-size:14.5px;}
-  .info-block .row .r{color:var(--text-faint); font-family:var(--mono); font-size:12.5px; text-align:right; white-space:nowrap;}
-  .info-block p.sub{color:var(--text-muted); font-size:13.5px; margin-top:4px;}
-
-  /* contact / footer */
-  footer{padding:72px 0 48px; position:relative; z-index:1;}
-  .footer-inner{text-align:center;}
-  .footer-inner h2{
-    font-family:var(--mono); font-size:clamp(26px,4vw,38px); margin-bottom:16px; color:var(--text);
-  }
-  .footer-inner p{color:var(--text-muted); max-width:46ch; margin:0 auto 30px;}
-  .footer-links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
-  .copyright{text-align:center; font-family:var(--mono); font-size:12px; color:var(--text-faint);}
 
   @media (max-width:860px){
-    .hero{grid-template-columns:1fr; padding-top:56px;}
-    .exp-card{grid-template-columns:1fr;}
-    .skills-grid{grid-template-columns:1fr;}
-    .two-col{grid-template-columns:1fr;}
-    nav.links{display:none;}
+    .hero-grid{grid-template-columns:1fr; text-align:left;}
+    .visual{order:2;}
+    .content{order:1;}
+    .hero{padding:100px 6vw 60px;}
   }
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <div class="logo"><span class="dot"></span>vibhay.pandey</div>
-    <nav class="links">
-      <a href="#experience">experience</a>
-      <a href="#skills">skills</a>
-      <a href="#achievements">achievements</a>
-      <a href="#education">education</a>
-      <a href="#contact">contact</a>
-    </nav>
-  </div>
-</header>
+<section class="hero">
+  <div class="hero-grid">
 
-<div class="wrap">
-  <section class="hero" id="home">
-    <div>
-      <div class="eyebrow">whoami</div>
-      <h1 class="name">Vibhay Kumar<br><span>Pandey.</span></h1>
-      <p class="role-line">
-        <strong>Software Developer</strong> at Ericsson, building backend systems on
-        Java &amp; Spring Boot — deployed on Kubernetes, wired through Kafka, and run on AWS.
-      </p>
-      <div class="hero-actions">
-        <a class="btn primary" href="mailto:vibhaypandey2000@gmail.com">Email me</a>
-        <a class="btn" href="https://github.com/Vibhaypandey/" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/vibhay-pandey-dev/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="Vibhay_Kumar_Pandey_Resume.pdf" target="_blank" rel="noopener">Resume ↓</a>
+    <div class="visual">
+      <div class="visual-bar">
+        <span class="r"></span><span class="y"></span><span class="g"></span>
+        <span class="tag">vibhay@ericsson:~</span>
       </div>
-      <div class="contact-strip">
-        <a href="mailto:vibhaypandey2000@gmail.com">vibhaypandey2000@gmail.com</a>
-        <a href="tel:+916266830971">+91 62668 30971</a>
-        <a href="https://leetcode.com/u/vibhay8583pandey/" target="_blank" rel="noopener">LeetCode</a>
+      <div class="visual-body">
+        <div><span class="p">$</span> <span class="c">whoami</span></div>
+        <div class="ok">vibhay-kumar-pandey</div>
+        <br>
+        <div><span class="p">$</span> <span class="c">cat role.txt</span></div>
+        <div><span class="k">title:</span> Software Developer</div>
+        <div><span class="k">company:</span> Ericsson</div>
+        <div><span class="k">stack:</span> Java, Spring Boot, K8s, AWS</div>
+        <br>
+        <div><span class="p">$</span> <span class="c">status</span></div>
+        <div class="ok">✓ open to good problems</div>
+        <div><span class="p">$</span><span class="caret"></span></div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="name-highlight">Vibhay Kumar Pandey</div>
+      <p class="role-line">I'm a <span class="who">Software Developer</span> — <span id="role-type"></span></p>
+
+      <div class="icon-row">
+        <a href="https://github.com/Vibhaypandey/" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:vibhaypandey2000@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/vibhay-pandey-dev/" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://leetcode.com/u/vibhay8583pandey/" target="_blank" rel="noopener" title="LeetCode"><i class="fas fa-code"></i></a>
+        <a href="Vibhay_Kumar_Pandey_Resume.pdf" target="_blank" rel="noopener" title="Resume"><i class="fas fa-file-lines"></i></a>
+      </div>
+
+      <div class="subline">
+        <span>vibhaypandey2000@gmail.com</span>
+        <span>+91 62668 30971</span>
         <span>Noida, India</span>
       </div>
     </div>
 
-    <div class="terminal">
-      <div class="terminal-bar">
-        <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
-        <span class="tlabel">vibhay@ericsson:~</span>
-      </div>
-      <div class="terminal-body">
-        <div><span class="prompt">$</span> <span class="cmd">kubectl get role</span></div>
-        <div class="ok">software-developer&nbsp;&nbsp;Running&nbsp;&nbsp;3y</div>
-        <br>
-        <div><span class="prompt">$</span> <span class="cmd">cat stack.yml</span></div>
-        <div><span class="k">lang:</span> java, python, sql, js</div>
-        <div><span class="k">framework:</span> spring-boot, hibernate</div>
-        <div><span class="k">infra:</span> eks, docker, helm, kafka</div>
-        <div><span class="k">db:</span> postgresql, mysql</div>
-        <br>
-        <div><span class="prompt">$</span> <span class="cmd">./deploy.sh --env=prod</span></div>
-        <div class="ok">✓ zero-downtime rollout complete</div>
-        <div><span class="prompt">$</span><span class="cursor-blink"></span></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<section id="experience">
-  <div class="wrap">
-    <div class="section-head"><h2>experience</h2><span class="tag">Nov 2022 — Present</span></div>
-    <div class="exp-card">
-      <div class="exp-meta">
-        <div class="company">Ericsson</div>
-        <div class="dates">Nov 2022 – Present</div>
-        <div class="place">Noida, India</div>
-      </div>
-      <div>
-        <div class="exp-role">Software Developer</div>
-        <div class="exp-stack">Java · Spring Boot · Microservices · Kafka · AWS EKS · Kubernetes · Docker · Helm · PostgreSQL</div>
-        <ul class="bullets">
-          <li>Led <strong>application-side AWS EKS upgrades</strong> across production Kubernetes environments, coordinating with infrastructure teams for zero-downtime rollouts.</li>
-          <li>Migrated Kubernetes deployments from manual resource updates to <strong>Helm-managed releases</strong>, standardizing configuration and reducing deployment drift.</li>
-          <li>Designed an automated <strong>transaction-data archival</strong> pipeline, moving 6-month-old records to S3 as CSV via a Kubernetes CronJob with failure recovery and rollback.</li>
-          <li>Migrated legacy XML integrations to an <strong>API Gateway</strong> with JSON contracts, replacing direct upstream calls and resolving related date-time issues.</li>
-          <li>Implemented threshold-based <strong>WhatsApp notifications</strong> for a chatbot product (50% / 80% / 100% usage) with an in-chat add-on purchase journey.</li>
-          <li>Hardened Spring Boot services — remediated authorization and session-expiration flaws, strengthened JWT signing, and mitigated clickjacking vulnerabilities.</li>
-          <li>Provided production engineering support across two product lines: root-cause analysis, code fixes, and leading UAT / SIT / Go-Live with customer-facing teams.</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
-<section id="skills">
-  <div class="wrap">
-    <div class="section-head"><h2>skills</h2><span class="tag">stack</span></div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h3>languages</h3>
-        <div class="chip-row">
-          <span class="chip">Java</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">JavaScript</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>backend</h3>
-        <div class="chip-row">
-          <span class="chip">Spring Boot</span><span class="chip">Spring MVC</span><span class="chip">Spring Security</span><span class="chip">Spring Data JPA</span><span class="chip">Hibernate</span><span class="chip">REST APIs</span><span class="chip">Microservices</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>cloud &amp; devops</h3>
-        <div class="chip-row">
-          <span class="chip">AWS EKS</span><span class="chip">ECR</span><span class="chip">S3</span><span class="chip">EC2</span><span class="chip">Lambda</span><span class="chip">CloudWatch</span><span class="chip">Auto Scaling</span><span class="chip">Kubernetes</span><span class="chip">Docker</span><span class="chip">Helm</span><span class="chip">GitLab CI/CD</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>data &amp; messaging</h3>
-        <div class="chip-row">
-          <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Kafka</span><span class="chip">Zookeeper</span><span class="chip">ActiveMQ</span><span class="chip">Infinispan</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>ai &amp; llms</h3>
-        <div class="chip-row">
-          <span class="chip">OpenAI APIs</span><span class="chip">Claude</span><span class="chip">GPT-4</span><span class="chip">OpenAI Agents SDK</span><span class="chip">Langfuse</span><span class="chip">Amazon Kiro</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h3>foundations</h3>
-        <div class="chip-row">
-          <span class="chip">DSA</span><span class="chip">OOP</span><span class="chip">DBMS</span><span class="chip">Design Patterns</span><span class="chip">LLD</span><span class="chip">HLD</span><span class="chip">Caching</span><span class="chip">Rate Limiting</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<script>
+  const roles = ["Java Backend Developer", "Kubernetes & AWS", "Open Source Enthusiast", "Problem Solver"];
+  const el = document.getElementById('role-type');
+  let ri = 0, ci = 0, deleting = false;
 
-<section id="achievements">
-  <div class="wrap two-col">
-    <div class="info-block">
-      <h3>achievements &amp; certifications</h3>
-      <div class="row"><div class="l">Solved 300+ DSA problems across LeetCode &amp; GeeksforGeeks</div></div>
-      <div class="row"><div class="l">Masters Program — Full-Stack Java Developer</div><div class="r">Simplilearn, 2022</div></div>
-      <p class="sub">Core Java &amp; DSA, Spring MVC, Advanced Java, Database Management, DevOps, Full-Stack Capstone Project.</p>
-    </div>
-    <div class="info-block">
-      <h3 id="education">education</h3>
-      <div class="row">
-        <div class="l">B.Tech, Mechanical Engineering<br><span style="color:var(--text-faint); font-size:13px;">Radharaman Institute of Technology and Science</span></div>
-        <div class="r">2017 – 2021<br>CGPA 7.81</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer id="contact">
-  <div class="wrap footer-inner">
-    <h2>Let's build something.</h2>
-    <p>Open to conversations on backend systems, cloud infrastructure, or just a good engineering problem.</p>
-    <div class="footer-links">
-      <a class="btn primary" href="mailto:vibhaypandey2000@gmail.com">vibhaypandey2000@gmail.com</a>
-      <a class="btn" href="https://github.com/Vibhaypandey/" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/vibhay-pandey-dev/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://leetcode.com/u/vibhay8583pandey/" target="_blank" rel="noopener">LeetCode</a>
-    </div>
-    <div class="copyright">© 2026 Vibhay Kumar Pandey — built with care, deployed on GitHub Pages.</div>
-  </div>
-</footer>
+  function tick(){
+    const word = roles[ri];
+    if(!deleting){
+      ci++;
+      el.textContent = word.slice(0, ci);
+      if(ci === word.length){ deleting = true; setTimeout(tick, 1400); return; }
+    } else {
+      ci--;
+      el.textContent = word.slice(0, ci);
+      if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+    }
+    setTimeout(tick, deleting ? 40 : 75);
+  }
+  tick();
+</script>
 
 </body>
 </html>
